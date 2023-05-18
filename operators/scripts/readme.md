@@ -74,9 +74,7 @@ In JavaScript, there are several assignment operators that you can use to assign
 
     ```javascript
     let x = 5;
-    x &=
-
- 3; // equivalent to x = x & 3; (x becomes 1)
+    x &= 3; // equivalent to x = x & 3; (x becomes 1)
     ```
 
 12. Bitwise OR assignment (`|=`): Performs a bitwise OR operation between the variable on the left and the value on the right, and assigns the result to the variable.
