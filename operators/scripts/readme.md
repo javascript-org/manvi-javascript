@@ -1,3 +1,62 @@
+## Binary Number System in 4 bits
+
+Here's a tabular format for the Binary Number System in 4 bits:
+
+| Decimal | Binary |
+|---------|--------|
+| 0       | 0000   |
+| 1       | 0001   |
+| 2       | 0010   |
+| 3       | 0011   |
+| 4       | 0100   |
+| 5       | 0101   |
+| 6       | 0110   |
+| 7       | 0111   |
+| 8       | 1000   |
+| 9       | 1001   |
+| 10      | 1010   |
+| 11      | 1011   |
+| 12      | 1100   |
+| 13      | 1101   |
+| 14      | 1110   |
+| 15      | 1111   |
+
+In this table, the left column represents the decimal numbers, and the right column represents their corresponding binary representations using 4 bits. Each row demonstrates a decimal number along with its binary equivalent.
+
+## Decimal to Binary
+To convert the decimal number 12 to binary, you can use a simple algorithm. Here's the step-by-step process:
+
+1. Divide the decimal number by 2 and note down the remainder.
+   - 12 ÷ 2 = 6 (remainder 0)
+
+2. Divide the quotient from step 1 by 2 and note down the remainder.
+   - 6 ÷ 2 = 3 (remainder 0)
+
+3. Repeat step 2 until the quotient is 0.
+   - 3 ÷ 2 = 1 (remainder 1)
+   - 1 ÷ 2 = 0 (remainder 1)
+
+4. The remainders obtained in reverse order form the binary equivalent of the decimal number.
+   - Reversed: 1100
+
+Therefore, the decimal number 12 is equal to the binary number 1100.
+
+## Convert binary 1100 to decimal
+
+To convert the binary number 1100 to decimal, you can use the positional value method. Each digit in the binary number represents a power of 2, starting from the rightmost digit with a power of 0 and increasing by 1 for each subsequent digit to the left.
+
+Here's the step-by-step process:
+
+1. Write down the binary number: 1100.
+
+2. Assign powers of 2 to each digit from right to left: 
+   - 1 * 2^3 + 1 * 2^2 + 0 * 2^1 + 0 * 2^0.
+
+3. Simplify the equation:
+   - 1 * 8 + 1 * 4 + 0 * 2 + 0 * 1 = 8 + 4 + 0 + 0 = 12.
+
+Therefore, the binary number 1100 is equal to the decimal number 12.
+
 # Assignment Operators
 In JavaScript, there are several assignment operators that you can use to assign values to variables and perform operations simultaneously. Here are all the assignment operators in JavaScript:
 
