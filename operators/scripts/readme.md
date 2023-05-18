@@ -1,3 +1,24 @@
+# Logical Assignment Operator
+
+In JavaScript, logical assignment operators are used to perform logical operations and assign the result to a variable in a single step. These operators combine logical operators (such as AND, OR, or XOR) with the assignment operator (=). Here are the logical assignment operators available in JavaScript:
+
+1. Logical AND assignment (&&=):
+   - Syntax: `x &&= y`
+   - Example: `x &&= y` is equivalent to `x = x && y`
+   - Explanation: If `x` is truthy, the value of `y` is assigned to `x`. Otherwise, `x` remains unchanged.
+
+2. Logical OR assignment (||=):
+   - Syntax: `x ||= y`
+   - Example: `x ||= y` is equivalent to `x = x || y`
+   - Explanation: If `x` is falsy, the value of `y` is assigned to `x`. Otherwise, `x` remains unchanged.
+
+3. Logical nullish assignment (??=):
+   - Syntax: `x ??= y`
+   - Example: `x ??= y` is equivalent to `x = x ?? y`
+   - Explanation: If `x` is `null` or `undefined`, the value of `y` is assigned to `x`. Otherwise, `x` remains unchanged.
+
+Note: Logical assignment operators were introduced in ECMAScript 2021 (ES12) and may not be supported in older JavaScript environments.
+
 ## Binary Number System in 4 bits
 
 Here's a tabular format for the Binary Number System in 4 bits:
