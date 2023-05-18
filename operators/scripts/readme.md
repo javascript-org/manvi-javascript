@@ -151,9 +151,7 @@ Here are the truth tables for all the basic logic gates:
 
 Note that the inputs and outputs of each gate are represented in binary (0 or 1). The output column shows the result of the gate's operation on the given inputs. The tilde (`~`) represents the NOT operation, while the other symbols represent the AND, OR, XOR, NAND, and NOR operations.
 
-# Assignment Operators
-
-# Bitwise Operation
+# Bitwise Operators
 Here is the table of bitwise operations on 4-bit binary numbers in markdown format:
 
 | Operator | Operation | Example 1 | Example 2 |
