@@ -1,0 +1,14 @@
+- function
+- function expression
+- function calling another function
+- function return values
+- function returning a function
+- self calling function
+- parametrized function
+- defualt parameter
+- rest parameter with function
+- arrow function
+- higher order function
+- function pass by value vs pass by reference
+- function currying
+- bind, call, apply
