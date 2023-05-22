@@ -17,8 +17,8 @@ function functionCalling() {
 }
 
 function myFunction() {
-  let returnValue = myFunction2();
-  console.log(returnValue);
+  let returnValueAsObject = myFunction2();
+  console.log(returnValueAsObject);
 }
 
 function myFunction2() {
@@ -39,10 +39,6 @@ function myFunction3() {
   return myFunction4;
 }
 
-const myFunction5 = function myFunction6() {
-  return myFunction4;
-};
-
 function myFunction6() {
   // self calling function
   (function selfcall() {
@@ -58,6 +54,7 @@ function myFunction7() {
   console.log(result);
 }
 
+// param based function
 function sum(x, y) {
   return x + y;
 }
@@ -72,6 +69,7 @@ function myFunction8() {
   console.log(result);
 }
 
+// default param
 function div(x, y = 1) {
   return x / y;
 }
@@ -95,4 +93,172 @@ function sumWithRestParams(x, y, ...z) {
     sumValue = sumValue + i;
   }
   return sumValue;
+}
+
+// arrow function
+
+const myArrowFunction = () => {
+  console.log("this is an arrow function");
+};
+
+const myArrowFunctionWithParams = (a = 1, b, ...z) => {
+  console.log(a, b, z);
+
+  let sum = 0;
+  sum = a + b;
+
+  for (const i of z) {
+    sum = sum + i;
+  }
+  return sum;
+};
+
+function myFunction10() {
+  let x = 10,
+    y = 20;
+  let result = myArrowFunctionWithParams(x, y, 30, 40);
+  console.log(result);
+}
+
+// higher order function
+
+function myHigherOrderFunction(param1, callback) {
+  console.log(`I am higher order function with param ${param1}`);
+  let result = callback(20);
+  return result;
+}
+
+function callbackFunction(param2) {
+  console.log(`I am the callback with param: ${param2}`);
+  return param2;
+}
+
+function myFunction11() {
+  let result = myHigherOrderFunction(10, callbackFunction);
+  console.log(result);
+}
+
+// function currying
+
+const curry = (a) => (b) => {
+  return a + b;
+};
+
+function myFunction12() {
+  let result = curry(5)(2);
+  console.log(result);
+  result = curry1(5)(2);
+  console.log(result);
+}
+
+const curry1 = (a) => {
+  let curry2 = (b) => {
+    return a + b;
+  };
+  return curry2;
+};
+
+// function and variable declartion inside function
+function myFunction13() {
+  let x = 10;
+  m1();
+  function m1() {
+    console.log("Inside m1", x);
+  }
+}
+
+// call
+
+function myFunction14() {
+  let person1 = {
+    firstName: "John",
+    lastName: "Doe",
+    display: function show(cityname) {
+      console.log(this.firstName, this.lastName, cityname);
+    },
+  };
+  person1.display("BLR");
+
+  let person2 = {
+    firstName: "Tom",
+    lastName: "Holland",
+    display: function show(cityname) {
+      console.log(this.firstName, this.lastName, cityname);
+    },
+  };
+
+  person2.display("New Delhi");
+}
+
+function myFunction15() {
+  let person1 = {
+    firstName: "John",
+    lastName: "Doe",
+  };
+
+  const display = function show(city, state) {
+    console.log(this.firstName, this.lastName, city, state);
+  };
+  display.call(person1, "Noida", "Up");
+
+  let person2 = {
+    firstName: "Tom",
+    lastName: "Holland",
+  };
+  display.call(person2, "Blr", "Ka");
+}
+
+// apply
+function myFunction16() {
+  let person1 = {
+    firstName: "John",
+    lastName: "Doe",
+  };
+
+  const display = function show(city, state) {
+    console.log(this.firstName, this.lastName, city, state);
+  };
+  display.apply(person1, ["Noida", "Up"]);
+
+  let person2 = {
+    firstName: "Tom",
+    lastName: "Holland",
+  };
+  display.apply(person2, ["Mumbai", "Mh"]); // always args goes as array
+}
+
+// function borrowing with call and apply
+function myFunction17() {
+  let person1 = {
+    firstName: "John",
+    lastName: "Doe",
+    display: function show(city, state) {
+      console.log(this.firstName, this.lastName, city, state);
+    },
+  };
+
+  person1.display.call(person1, "Noida", "Up");
+  person1.display.apply(person1, ["Greater Noida", "Up"]);
+
+  let person2 = {
+    firstName: "Tom",
+    lastName: "Holland",
+  };
+  person1.display.call(person2, "Mumbai", "Mh");
+  person1.display.apply(person2, ["Navi Mumbai", "Mh"]);
+}
+
+// bind
+// binding data and code in a single unit
+function myFunction18() {
+  let person1 = {
+    firstName: "John",
+    lastName: "Doe",
+  };
+
+  const display = function show(city, state) {
+    console.log(this.firstName, this.lastName, city, state);
+  };
+  const bindDisplay = display.bind(person1, "Noida", "Up");
+  bindDisplay();
 }

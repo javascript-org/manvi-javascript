@@ -9,6 +9,8 @@
 - rest parameter with function
 - arrow function
 - higher order function
-- function pass by value vs pass by reference
+- callback function
 - function currying
 - bind, call, apply
+- function pass by value vs pass by reference
+- scope & closures
