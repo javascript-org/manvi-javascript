@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #game-board {
+      width: 400px;
+      height: 400px;
+      border: 1px solid #000;
+      position: relative;
+    }
+
+    #player {
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-board">
+    <div id="player"></div>
+  </div>
+
+  <script>
+    // Get references to HTML elements
+    const player = document.getElementById("player");
+    const gameBoard = document.getElementById("game-board");
+    player.style.top=0;
+    player.style.left=0;
+    // Event listener for arrow key presses
+    document.addEventListener("keydown", movePlayer);
+
+    // Function to move the player
+    function movePlayer(event) {
+      const key = event.key;
+      console.log(key);
+      switch (key) {
+        case "ArrowUp":
+          player.style.top = parseInt(player.style.top) - 10 + "px";
+          break;
+        case "ArrowDown":
+          player.style.top = parseInt(player.style.top) + 10 + "px";
+          break;
+        case "ArrowLeft":
+          player.style.left = parseInt(player.style.left) - 10 + "px";
+          break;
+        case "ArrowRight":
+          player.style.left = parseInt(player.style.left) + 10 + "px";
+          break;
+      }
+    }
+  </script>
+</body>
+</html>
