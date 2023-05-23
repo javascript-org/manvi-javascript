@@ -192,3 +192,25 @@ function multipleIndexWithForLoop() {
     console.log("i: " + i + ", j: " + j);
   }
 }
+
+// for in with object
+function forInLoop() {
+  let person = {
+    firstName: "John",
+    lastName: "Doe",
+  };
+
+  for (const key in person) {
+    let value = person[key];
+    console.log(`${key} = ${value}`);
+  }
+}
+
+// for of loop with arrays for ordering
+function forOfLoop() {
+  let arr = ["Hi", "Hello", "Bye"];
+
+  for (const item of arr) {
+    console.log(item);
+  }
+}
