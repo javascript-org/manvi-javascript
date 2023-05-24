@@ -51,5 +51,5 @@ function btnHandler5()
 
     (function greet(){
         console.log('Welcome John, Self calling');
-    })()
+    })();//declaration and calling together
 }
