@@ -1,5 +1,3 @@
-
-
 function arrayCreation() {
   // array constructor with size zero
   let arr1 = new Array();
@@ -67,29 +65,84 @@ function indexWithAt() {
   console.log(arr.at(-2));
 }
 
-function indexInit()
-{
-    let arr= [];
-    arr[0] = 'Hi';
-    console.log(arr);
-    arr[0] = 'Hello';
-    arr[1] = 'Bye';
-    arr[10] = 'Done';
+function indexInit() {
+  let arr = [];
+  arr[0] = "Hi";
+  console.log(arr);
+  arr[0] = "Hello";
+  arr[1] = "Bye";
+  arr[10] = "Done";
 
-    console.log(arr);
+  console.log(arr);
 }
 
+function addOrRemoveFromEnd() {
+  let arr = [1, 2, 3];
+  arr.push(4);
+  arr.push(5, 6);
+  arr.push(...arr);
+
+  let arr1 = [100, 200, 300];
+  arr.push(arr1);
+
+  console.log(arr);
+
+  let lastItem = arr.pop();
+
+  console.log(lastItem);
+
+  lastItem = arr.pop();
+
+  console.log(lastItem);
+}
+
+function addOrRemoveAtFront() {
+  let arr = [1, 2, 3];
+  arr.unshift(4);
+  arr.unshift(5, 6);
+  arr.unshift(...arr);
+
+  let arr1 = [100, 200, 300];
+  arr.unshift(arr1);
+
+  console.log(arr);
+
+  let firstItem = arr.shift();
+
+  console.log(firstItem);
+
+  firstItem = arr.shift();
+
+  console.log(firstItem);
+}
+
+function deleteByIndex()
+{
+    let arr=['Hi', 'Hello', 'Bye'];
+
+    delete arr[1];
+
+    console.log(arr);
+    console.log(arr[1]);
+}
 
 // =====================================================
 
+function addEventListeners() {
+  addClickEvent("id1", arrayCreation);
+  addClickEvent("id2", mixedArray);
+  addClickEvent("id3", indexWithAt);
+  addClickEvent("id4", indexInit);
+  addClickEvent("id5", addOrRemoveFromEnd);
+  addClickEvent("id6", addOrRemoveAtFront);
+  addClickEvent("id7", deleteByIndex);
+}
+
+function addClickEvent(id, functionParam) {
+  let btnId = document.getElementById(id);
+  btnId.onclick = functionParam;
+}
+
 window.onload = function onLoad() {
-    addClickEvent("id1", arrayCreation);
-    addClickEvent("id2", mixedArray);
-    addClickEvent("id3", indexWithAt);
-    addClickEvent("id4", indexInit);
-  };
-  
-  function addClickEvent(id, functionParam) {
-    let btnId = document.getElementById(id);
-    btnId.onclick = functionParam;
-  }
+  addEventListeners();
+};

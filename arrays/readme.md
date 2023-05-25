@@ -7,4 +7,4 @@
 - Index Access to array elements from both sides
 - Index intialization of array.
 - Push item(s) / Pop item from end
-- Sift item / Unshift item(s) from start
+- Shift item / Unshift item(s) from start
