@@ -3,13 +3,14 @@
 - function
 - function expression
 - function calling another function
+- arrow function
+- self calling function
+- assign function to const or variable
 - function return values
 - function returning a function
-- self calling function
 - parametrized function
 - defualt parameter
 - rest parameter with function
-- arrow function
 - higher order function
 - callback function
 - function currying
