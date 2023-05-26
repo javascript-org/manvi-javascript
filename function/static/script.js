@@ -262,3 +262,20 @@ function myFunction18() {
   const bindDisplay = display.bind(person1, "Noida", "Up");
   bindDisplay();
 }
+
+function myFunction19()
+{
+   let arr = [75, 80];
+   let student = {
+    firstName: 'John',
+    lastName: 'Doe'
+   }
+   let roll = 23;
+   destructuredParam(arr, student, roll);
+}
+
+function destructuredParam([x,y],{firstName, lastName}, roll)
+{
+  console.log(`${roll} has marks: ${x} and ${y}`);
+  console.log(`${firstName} and ${lastName}`);
+}

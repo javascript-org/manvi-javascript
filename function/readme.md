@@ -16,6 +16,7 @@
 - bind, call, apply
 - function pass by value vs pass by reference
 - scope & closures
+- destructuring function params
 
 
 ## Functions
@@ -627,3 +628,40 @@ In this example, `myArray` is passed to the `modifyArray` function. The function
 It's important to note that although objects and arrays are passed by reference in JavaScript, the reference itself is still passed by value. If you were to reassign the entire object or array variable inside the function, it would only affect the local variable and not the original variable outside the function.
 
 In summary, JavaScript is pass-by-value, but when it comes to objects and arrays, their references are passed by value. This distinction can sometimes lead to confusion when working with mutable objects.
+
+## Destructuring Function Param
+
+Destructuring function parameters is a technique in JavaScript that allows you to extract specific values from an object or an array directly within the function parameter declaration. This can make your code more concise and readable. Here's an example of how to destructure function parameters:
+
+1. **Object Destructuring:**
+   ```javascript
+   function printUserDetails({ name, age, email }) {
+     console.log(`Name: ${name}`);
+     console.log(`Age: ${age}`);
+     console.log(`Email: ${email}`);
+   }
+
+   const user = {
+     name: 'John Doe',
+     age: 30,
+     email: 'johndoe@example.com'
+   };
+
+   printUserDetails(user);
+   ```
+   In this example, the `printUserDetails` function receives an object as a parameter. Instead of accessing the properties using dot notation (`user.name`, `user.age`, `user.email`), we destructure the `user` object directly within the function parameter declaration. This allows us to directly access the properties as separate variables (`name`, `age`, `email`) within the function body.
+
+2. **Array Destructuring:**
+   ```javascript
+   function printCoordinates([x, y]) {
+     console.log(`x: ${x}`);
+     console.log(`y: ${y}`);
+   }
+
+   const coordinates = [10, 20];
+
+   printCoordinates(coordinates);
+   ```
+   In this example, the `printCoordinates` function receives an array as a parameter. We destructure the `coordinates` array directly within the function parameter declaration to extract the values `x` and `y` from the array.
+
+By using object or array destructuring in function parameters, you can easily extract specific values from objects or arrays, simplifying your code and making it more expressive.
