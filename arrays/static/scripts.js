@@ -116,14 +116,72 @@ function addOrRemoveAtFront() {
   console.log(firstItem);
 }
 
-function deleteByIndex()
-{
-    let arr=['Hi', 'Hello', 'Bye'];
+function deleteByIndex() {
+  let arr = ["Hi", "Hello", "Bye"];
 
-    delete arr[1];
+  delete arr[1];
 
-    console.log(arr);
-    console.log(arr[1]);
+  console.log(arr);
+  console.log(arr[1]);
+}
+
+function sparseArray() {
+  let arr = [];
+  arr[5] = undefined;
+  arr[6] = 100;
+
+  console.log(arr, arr.length);
+  console.log(5 in arr); // element present at 5th index
+  console.log(6 in arr); // element present at 6th index
+  console.log(2 in arr); // element not present at 3rd index
+
+  let arr1 = [12, , 34];
+  console.log(arr1, arr1.length);
+  console.log(0 in arr1);
+  console.log(1 in arr1);
+}
+
+function arrayIteration() {
+  // we can use any loop with index based approach
+  let arr = ["Hi", "Hello", "Bye"];
+  for (const index in arr) {
+    console.log(`${index} = ${arr[index]}`);
+  }
+  // ============ reverse traversal ===================
+  for (let index = arr.length - 1; index >= 0; index--) {
+    console.log(`${index} = ${arr[index]}`);
+  } // try this with do...while or while loop
+
+  for (const item of arr) {
+    console.log(`${item}`);
+  }
+
+  // iterating sparse array
+  let arr1 = [10, , , ,, '', 20];
+  for (let item of arr1) { // try this with index approach
+    if (item === undefined) { // skip undefined elements
+      continue;
+    }
+    console.log(item);
+  }
+
+  // using entries to get index and value
+  for(let [index,value] of arr1.entries()){
+    console.log(`${index} = ${value}`);
+  }
+
+  // with function
+  function displayItem(item)
+  {
+    console.log(item);
+  }
+  arr1.forEach(displayItem);
+
+  // with arrow function forEach
+  arr1.forEach(item=>{ // it skips undefined
+    console.log(`${item}`);
+  })
+
 }
 
 // =====================================================
@@ -136,6 +194,8 @@ function addEventListeners() {
   addClickEvent("id5", addOrRemoveFromEnd);
   addClickEvent("id6", addOrRemoveAtFront);
   addClickEvent("id7", deleteByIndex);
+  addClickEvent("id8", sparseArray);
+  addClickEvent("id9", arrayIteration);
 }
 
 function addClickEvent(id, functionParam) {

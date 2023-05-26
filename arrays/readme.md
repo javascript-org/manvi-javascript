@@ -8,3 +8,6 @@
 - Index intialization of array.
 - Push item(s) / Pop item from end
 - Shift item / Unshift item(s) from start
+- Sparse Array
+- Array Iteration
+- Multidimensional Array
