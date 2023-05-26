@@ -157,31 +157,170 @@ function arrayIteration() {
   }
 
   // iterating sparse array
-  let arr1 = [10, , , ,, '', 20];
-  for (let item of arr1) { // try this with index approach
-    if (item === undefined) { // skip undefined elements
+  let arr1 = [10, , , , , "", 20];
+  for (let item of arr1) {
+    // try this with index approach
+    if (item === undefined) {
+      // skip undefined elements
       continue;
     }
     console.log(item);
   }
 
   // using entries to get index and value
-  for(let [index,value] of arr1.entries()){
+  for (let [index, value] of arr1.entries()) {
     console.log(`${index} = ${value}`);
   }
 
   // with function
-  function displayItem(item)
-  {
+  function displayItem(item) {
     console.log(item);
   }
   arr1.forEach(displayItem);
 
   // with arrow function forEach
-  arr1.forEach(item=>{ // it skips undefined
+  arr1.forEach((item) => {
+    // it skips undefined
     console.log(`${item}`);
-  })
+  });
+}
 
+function multiDimensionArray() {
+  let name1 = "John";
+  let name2 = "Doe";
+  console.log(name1, name2);
+  let name3 = ["John", "Doe", "Alex", "Cook"];
+  console.log(name3);
+  console.log(name3[0]);
+  console.log(name3[1]);
+  console.log(name3[2]);
+  console.log(name3.length);
+
+  for (let index in name3) {
+    let value = name3[index];
+    console.log(`${index} = ${value}`);
+  }
+
+  let name4 = [
+    ["John", "Doe"],
+    ["Alex", "Cook"],
+  ];
+
+  for (let index in name4) {
+    let value = name4[index];
+    console.log(`${index} = ${value}`);
+  }
+}
+
+function arrayFunctionalArrowMethods() {
+  let arr = [1, 2, 3, 4, 5];
+
+  // map()
+  let squareValueFunction = (item) => {
+    return item * item;
+  };
+  let squares = arr.map(squareValueFunction);
+  console.log(squares);
+  squares = arr.map((item) => {
+    return item * item;
+  });
+  console.log(squares);
+
+  // filter
+  let filterValues = squares.filter((item) => {
+    return item > 10;
+  });
+
+  console.log(filterValues);
+
+  filterValues = squares.filter((item, index) => {
+    let resultFlag = index % 2 === 0;
+    return resultFlag;
+  });
+
+  console.log(filterValues);
+
+  // sparse array
+  let sparse = [1, , null, undefined, 2, 3, null];
+  sparse.length = 15;
+  console.log(sparse);
+  let skipEmptyValues = sparse.filter(() => {
+    return true;
+  });
+  console.log(skipEmptyValues);
+
+  skipEmptyValues = skipEmptyValues.filter((item) => {
+    let resultFlag = item !== null && item !== undefined;
+    return resultFlag;
+  });
+  console.log(skipEmptyValues);
+
+  // filter chain
+  let validNumbers = sparse
+    .filter(() => {
+      return true;
+    })
+    .filter((item) => {
+      let resultFlag = item !== null && item !== undefined;
+      return resultFlag;
+    });
+  console.log(validNumbers);
+
+  // using filter and map
+
+  let numbers = [1, 2, 3, 4, 5, 6];
+
+  let squareValues = numbers
+    .filter((item) => {
+      return item % 2 === 0;
+    })
+    .map((item) => {
+      return item * item;
+    });
+  console.log(squareValues);
+
+  // find(): finds the first match in the array
+
+  let firstMatchElement = numbers.find((item, index) => {
+    return index + item > 4;
+  });
+  console.log(firstMatchElement);
+
+  // findIndex(): finds the first index that matches the condition
+  let firstMatchIndex = numbers.findIndex((item, index) => {
+    return index + item > 4;
+  });
+  console.log(firstMatchIndex);
+
+  // reduce moves from
+  let digits = [1, 2, 3];
+  let result = digits.reduce((x, y, index, digits) => {
+    console.log(index, digits, x, y);
+    return 10 * x + y;
+  });
+  console.log(result);
+
+  // reduce right moves from right to left
+  result = digits.reduceRight((x, y, index, digits) => {
+    console.log(index, digits);
+    return 10 * x + y;
+  });
+  console.log(result);
+
+  // every : checks every if every element is matching a given condition
+
+  let everyNumbers = [1, 2, 3, 4];
+  let resultFlag = everyNumbers.every((item) => {
+    return item < 3;
+  });
+  console.log(resultFlag);
+
+  // some: check if some of the element are matching a given conditon
+  let someNumbers = [1, 2, 3, 4, 5];
+  resultFlag = someNumbers.some((item) => {
+    return item >= 10;
+  });
+  console.log(resultFlag);
 }
 
 // =====================================================
@@ -196,6 +335,7 @@ function addEventListeners() {
   addClickEvent("id7", deleteByIndex);
   addClickEvent("id8", sparseArray);
   addClickEvent("id9", arrayIteration);
+  addClickEvent("id10", arrayFunctionalArrowMethods);
 }
 
 function addClickEvent(id, functionParam) {
