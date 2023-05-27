@@ -176,7 +176,6 @@ function arrayIteration() {
   for (let [index, value] of arr1.entries()) {
     console.log(`${index} = ${value}`);
   }
-
 }
 
 function multiDimensionArray() {
@@ -226,8 +225,7 @@ function arrayFunctionalArrowMethods() {
   someExample();
 }
 
-function forEachExample()
-{
+function forEachExample() {
   let arr1 = [10, 20, 30, 40];
   // with function
   function displayItem(item) {
