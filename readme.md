@@ -24,3 +24,9 @@
 - Browser Documents, Events, Forms
 - Modules
 - Testing with Mocha
+
+
+## References
+
+- Javascript the definitive guide book
+- Javascript for impatients book
