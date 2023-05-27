@@ -225,6 +225,27 @@ function arrayFunctionalArrowMethods() {
   someExample();
 }
 
+
+/**
+  * flat, flatMap
+  */
+ function arrayMethods2() {}
+ 
+ 
+/**
+ * slice, splice
+ * join, split
+ * sort, reverse
+ * includes, indexOf, lastIndexOf
+ * concat, toString
+ * fill, copyWithin
+ */
+ function arrayMethods1() {
+
+ }
+
+ 
+
 function forEachExample() {
   let arr1 = [10, 20, 30, 40];
   // with function
@@ -372,20 +393,6 @@ function mapExample() {
   });
   console.log(squares);
 }
-/**
- * slice, splice
- * join, split
- * sort, reverse
- * includes, indexOf, lastIndexOf
- * concat, toString
- * fill, copyWithin
- */
-function arrayMethods1() {}
-
-/**
- * flat, flatMap
- */
-function arrayMethods2() {}
 
 // =====================================================
 
