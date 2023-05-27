@@ -75,7 +75,9 @@ function indexInit() {
 
   console.log(arr);
 }
-
+/**
+ *  push , pop
+ */
 function addOrRemoveFromEnd() {
   let arr = [1, 2, 3];
   arr.push(4);
@@ -96,6 +98,9 @@ function addOrRemoveFromEnd() {
   console.log(lastItem);
 }
 
+/**
+ * shift, unshift
+ */
 function addOrRemoveAtFront() {
   let arr = [1, 2, 3];
   arr.unshift(4);
@@ -172,17 +177,6 @@ function arrayIteration() {
     console.log(`${index} = ${value}`);
   }
 
-  // with function
-  function displayItem(item) {
-    console.log(item);
-  }
-  arr1.forEach(displayItem);
-
-  // with arrow function forEach
-  arr1.forEach((item) => {
-    // it skips undefined
-    console.log(`${item}`);
-  });
 }
 
 function multiDimensionArray() {
@@ -212,34 +206,116 @@ function multiDimensionArray() {
   }
 }
 
+/**
+ * map, filter, forEach
+ * find, findIndex
+ * reduce, reduceRight
+ * every, some
+ */
 function arrayFunctionalArrowMethods() {
-  let arr = [1, 2, 3, 4, 5];
+  forEachExample();
+  mapExample();
+  filterExample();
+  sparseArrayFilter();
+  filterAndMapExample();
+  findExample();
+  findByIndexExample();
+  reduceExample();
+  reduceRightExample();
+  everyExample();
+  someExample();
+}
 
-  // map()
-  let squareValueFunction = (item) => {
-    return item * item;
-  };
-  let squares = arr.map(squareValueFunction);
-  console.log(squares);
-  squares = arr.map((item) => {
-    return item * item;
+function forEachExample()
+{
+  let arr1 = [10, 20, 30, 40];
+  // with function
+  function displayItem(item) {
+    console.log(`${item}`);
+  }
+  arr1.forEach(displayItem);
+
+  // with arrow function forEach
+  arr1.forEach((item) => {
+    // it skips undefined
+    console.log(`${item}`);
   });
-  console.log(squares);
+}
 
-  // filter
-  let filterValues = squares.filter((item) => {
-    return item > 10;
+function someExample() {
+  // some: check if some of the element are matching a given conditon
+  let numbers = [1, 2, 3, 4, 5];
+  let resultFlag = numbers.some((item) => {
+    return item >= 10;
   });
+  console.log(resultFlag);
+}
 
-  console.log(filterValues);
-
-  filterValues = squares.filter((item, index) => {
-    let resultFlag = index % 2 === 0;
-    return resultFlag;
+function everyExample() {
+  // every : checks every if every element is matching a given condition
+  let numbers = [1, 2, 3, 4];
+  let resultFlag = numbers.every((item) => {
+    return item < 3;
   });
+  console.log(resultFlag);
+}
 
-  console.log(filterValues);
+function reduceRightExample() {
+  let initialValue = 5;
+  let digits = [1, 2, 3];
+  // reduce right moves from right to left
+  let result = digits.reduceRight((x, y, index, digits) => {
+    console.log(index, digits);
+    return 10 * x + y;
+  }, initialValue);
+  console.log(result);
+}
 
+function reduceExample() {
+  // reduce moves from left to right
+  let initialValue = 5;
+  let digits = [1, 2, 3];
+  let result = digits.reduce((x, y, index, digits) => {
+    console.log(index, digits, x, y);
+    return 10 * x + y;
+  }, initialValue);
+  console.log(result);
+}
+
+function findByIndexExample() {
+  let numbers = [1, 2, 3, 4, 5, 6];
+
+  // findIndex(): finds the first index that matches the condition
+
+  let firstMatchIndex = numbers.findIndex((item, index) => {
+    return index + item > 4;
+  });
+  console.log(firstMatchIndex);
+}
+
+function findExample() {
+  let numbers = [1, 2, 3, 4, 5, 6];
+  // find(): finds the first match in the array
+  let firstMatchElement = numbers.find((item, index) => {
+    return index + item > 4;
+  });
+  console.log(firstMatchElement);
+}
+
+function filterAndMapExample() {
+  let numbers = [1, 2, 3, 4, 5, 6];
+
+  let squareValues = numbers
+    .filter((item) => {
+      return item % 2 === 0;
+    })
+    .map((item) => {
+      return item * item;
+    });
+  console.log(squareValues);
+}
+
+function sparseArrayFilter() {
   // sparse array
   let sparse = [1, , null, undefined, 2, 3, null];
   sparse.length = 15;
@@ -265,63 +341,53 @@ function arrayFunctionalArrowMethods() {
       return resultFlag;
     });
   console.log(validNumbers);
-
-  // using filter and map
-
-  let numbers = [1, 2, 3, 4, 5, 6];
-
-  let squareValues = numbers
-    .filter((item) => {
-      return item % 2 === 0;
-    })
-    .map((item) => {
-      return item * item;
-    });
-  console.log(squareValues);
-
-  // find(): finds the first match in the array
-
-  let firstMatchElement = numbers.find((item, index) => {
-    return index + item > 4;
-  });
-  console.log(firstMatchElement);
-
-  // findIndex(): finds the first index that matches the condition
-  let firstMatchIndex = numbers.findIndex((item, index) => {
-    return index + item > 4;
-  });
-  console.log(firstMatchIndex);
-
-  // reduce moves from
-  let digits = [1, 2, 3];
-  let result = digits.reduce((x, y, index, digits) => {
-    console.log(index, digits, x, y);
-    return 10 * x + y;
-  });
-  console.log(result);
-
-  // reduce right moves from right to left
-  result = digits.reduceRight((x, y, index, digits) => {
-    console.log(index, digits);
-    return 10 * x + y;
-  });
-  console.log(result);
-
-  // every : checks every if every element is matching a given condition
-
-  let everyNumbers = [1, 2, 3, 4];
-  let resultFlag = everyNumbers.every((item) => {
-    return item < 3;
-  });
-  console.log(resultFlag);
-
-  // some: check if some of the element are matching a given conditon
-  let someNumbers = [1, 2, 3, 4, 5];
-  resultFlag = someNumbers.some((item) => {
-    return item >= 10;
-  });
-  console.log(resultFlag);
 }
+
+function filterExample() {
+  let numbers = [1, 2, 30, 40, 5];
+  // filter
+  let filterValues = numbers.filter((item) => {
+    return item > 10;
+  });
+
+  console.log(filterValues);
+
+  filterValues = numbers.filter((item, index) => {
+    let resultFlag = index % 2 === 0;
+    return resultFlag;
+  });
+
+  console.log(filterValues);
+}
+
+function mapExample() {
+  let arr = [1, 2, 3, 4, 5];
+
+  // map()
+  let squareValueFunction = (item) => {
+    return item * item;
+  };
+  let squares = arr.map(squareValueFunction);
+  console.log(squares);
+  squares = arr.map((item) => {
+    return item * item;
+  });
+  console.log(squares);
+}
+/**
+ * slice, splice
+ * join, split
+ * sort, reverse
+ * includes, indexOf, lastIndexOf
+ * concat, toString
+ * fill, copyWithin
+ */
+function arrayMethods1() {}
+
+/**
+ * flat, flatMap
+ */
+function arrayMethods2() {}
 
 // =====================================================
 
