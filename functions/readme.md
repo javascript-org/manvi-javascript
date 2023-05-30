@@ -17,6 +17,7 @@
 - bind, call, apply
 - function pass by value vs pass by reference
 - scope & closures
+- function destructuring params
 
 
 ## Functions

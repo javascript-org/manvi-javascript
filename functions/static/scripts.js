@@ -116,10 +116,12 @@ function greet2(name, floor = 1) {
 }
 
 // rest parameters function
-function studentSubjects(name, standard, ...subjects){
-    console.log(subjects, subjects.length);
-    console.log(subjects[0]);
-    console.log(`student ${name} should learn subjects: ${subjects} in std ${standard}`);
+function studentSubjects(name, standard, ...subjects) {
+  console.log(subjects, subjects.length);
+  console.log(subjects[0]);
+  console.log(
+    `student ${name} should learn subjects: ${subjects} in std ${standard}`
+  );
 }
 /**
  * function expression
@@ -145,7 +147,7 @@ function btnHandler9() {
 // function currying
 function btnHandler10() {
   let resultFunction = multiply(2);
-  console.log(`got from parent: ${resultFunction} `)
+  console.log(`got from parent: ${resultFunction} `);
   let result = resultFunction(3);
   console.log(result);
 
@@ -155,15 +157,171 @@ function btnHandler10() {
 
 function multiply(a) {
   console.log(a);
-  function multiplyWith(b=10) { // default parameter
+  function multiplyWith(b = 10) {
+    // default parameter
     console.log(a, b);
     return a * b;
   }
   return multiplyWith;
 }
 
-function btnHandler11()
+function btnHandler11() {
+  studentSubjects("John");
+  studentSubjects("Alex", "10", "C++", "Java", "SQL");
+}
+
+function higherOrderFunction1(x, y, callbackFunction) {
+  let result = x + y;
+  let squareValue = callbackFunction(result);
+  return squareValue;
+}
+
+function squareValueFunction(value) {
+  return Math.pow(value, 2);
+}
+
+function btnHandler12() {
+  let result = higherOrderFunction1(8, 2, squareValueFunction);
+  console.log(result);
+}
+
+function multiplier(a) {
+  function multiply(b) {
+    return a * b;
+  }
+
+  return multiply;
+}
+
+function btnHandler13() {
+  let resultMultiplier = multiplier(2);
+  console.log(resultMultiplier);
+  let result = resultMultiplier(5);
+  console.log(result);
+  result = multiplier(2)(5);
+  console.log(result);
+}
+
+function destructuringValues() {
+  let arr = ["Hi", "Hello"];
+  let a = arr[0];
+  let b = arr[1];
+  console.log(a, b);
+
+  let [x, y] = arr;
+  console.log(x, y);
+
+  let person = {
+    firstName: "John",
+    lastName: "Doe",
+  };
+
+  let { firstName, lastName } = person;
+  console.log(person.firstName, person["lastName"]);
+  console.log(firstName, lastName);
+}
+
+function btnHandler14() {
+  destructuringValues();
+}
+
+function destrcuturedParams(x, y, [a, b], { firstName, lastName }) {
+  console.log(x, y, a, b, firstName, lastName);
+}
+
+function btnHandler15() {
+  let x = 10;
+  let y = 20;
+  let arr = [30, 40];
+  let person = {
+    firstName: "John",
+    lastName: "Doe",
+  };
+  destrcuturedParams(x, y, arr, person);
+}
+
+function passByValue() {
+  let age = 10;
+  function1(age); //
+  console.log(age);
+}
+
+function function1(age) {
+  age = age + 1;
+  console.log(age);
+}
+
+function btnHandler16() {
+  passByValue();
+}
+
+function function2(arr, person) {
+  arr[0] = 100;
+  console.log(arr);
+  person.firstName = "Alex";
+  console.log(person);
+}
+
+function passByReference() {
+  let arr = [10, 20];
+  let person = {
+    firstName: "John",
+    lastName: "Doe",
+  };
+  function2(arr, person);
+  console.log(arr);
+  console.log(person);
+}
+
+function btnHandler17() {
+  passByReference();
+}
+
+function callAndApplyExample() {
+  let person1 = {
+    firstName: "John",
+    lastName: "Doe",
+    display: function (state, city) {
+      console.log(this.firstName, this.lastName, state, city);
+    },
+  };
+
+  person1.display('up', 'noida');
+
+  let person2={
+    firstName: 'Alex',
+    lastName: 'Cook'
+  }
+  // function borrowing
+  person1.display.call(person2, 'ka', 'blr');
+  person1.display.apply(person2, ['KA', 'BLR']);
+}
+
+
+function display(state, city) {
+  console.log(this.firstName, this.lastName, state, city);
+}
+
+function callAndApplyExample_1() {
+  let person1 = {
+    firstName: "John",
+    lastName: "Doe",
+  };
+
+  display('up', 'noida');
+  display.call(person1, 'up', 'noida');
+  display.call(null, 'up', 'noida');
+
+  let person2={
+    firstName: 'Alex',
+    lastName: 'Cook'
+  }
+  display.call(person2, 'ka', 'blr');
+  display.apply(person2, ['KA', 'BLR']);
+}
+
+function btnHandler18()
 {
-  studentSubjects('John');
-  studentSubjects('Alex','10', 'C++', 'Java', 'SQL');
+  callAndApplyExample();
+  callAndApplyExample_1();
 }
