@@ -38,5 +38,8 @@ function greet() {
   let Exponentiation1 = k ** 4;
   console.log(Exponentiation1);
 
-
+ 
+}
+function datatype() {
+  console.log("datatype")
 }

@@ -41,5 +41,5 @@ console.log(Exponentiation1)
 }
 
 function datatype() {
- console.log("datatype");
+ console.log("datatype")
 }
