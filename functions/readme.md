@@ -18,6 +18,7 @@
 - function pass by value vs pass by reference
 - scope & closures
 - function destructuring params
+- setTimeout, setInterval
 
 
 ## Functions
@@ -629,3 +630,180 @@ In this example, `myArray` is passed to the `modifyArray` function. The function
 It's important to note that although objects and arrays are passed by reference in JavaScript, the reference itself is still passed by value. If you were to reassign the entire object or array variable inside the function, it would only affect the local variable and not the original variable outside the function.
 
 In summary, JavaScript is pass-by-value, but when it comes to objects and arrays, their references are passed by value. This distinction can sometimes lead to confusion when working with mutable objects.
+
+## Function Destructured Params
+
+Function parameter destructuring is a feature in JavaScript that allows you to extract values from objects or arrays passed as parameters to a function and assign them to variables in a concise and convenient way. Here's an example of function parameter destructuring using both array and object types:
+
+1. Array Destructuring:
+
+```javascript
+function printFullName([firstName, lastName]) {
+  console.log(`Full Name: ${firstName} ${lastName}`);
+}
+
+// Calling the function with an array argument
+let person = ["John", "Doe"];
+printFullName(person); // Output: Full Name: John Doe
+```
+
+In the above example, the `printFullName` function expects an array as a parameter. Using array destructuring, the elements of the array are extracted and assigned to the `firstName` and `lastName` variables within the function body.
+
+2. Object Destructuring:
+
+```javascript
+function printPersonInfo({ name, age }) {
+  console.log(`Name: ${name}`);
+  console.log(`Age: ${age}`);
+}
+
+// Calling the function with an object argument
+let person = { name: "John Doe", age: 30 };
+printPersonInfo(person);
+// Output:
+// Name: John Doe
+// Age: 30
+```
+
+In this example, the `printPersonInfo` function expects an object as a parameter. Using object destructuring, the properties `name` and `age` are extracted from the object and assigned to corresponding variables within the function.
+
+By using function parameter destructuring, you can access the values directly without needing to reference the entire object or array, which can make your code more readable and concise.
+
+## Function Scope & Lexical Scope
+
+Function Scope and Lexical Scope are important concepts in JavaScript that determine how variables are accessed and resolved within the code. Here's an explanation of each concept:
+
+1. Function Scope:
+   Function Scope refers to the visibility and accessibility of variables within a particular function. Variables declared within a function using the `var`, `let`, or `const` keywords have function scope. They are only accessible within the function in which they are defined, including any nested functions.
+
+   Example:
+   ```javascript
+   function myFunction() {
+     var x = 10; // Function-scoped variable
+     console.log(x);
+   }
+   
+   myFunction(); // Output: 10
+   console.log(x); // Error: x is not defined
+   ```
+
+   In the above example, the variable `x` is defined within the `myFunction` function and can only be accessed within that function. Attempting to access `x` outside of the function will result in an error.
+
+2. Lexical Scope:
+   Lexical Scope, also known as Static Scope, determines the visibility and accessibility of variables based on their position in the source code. In Lexical Scope, variables are resolved based on where they are defined within the code, regardless of where they are accessed.
+
+   Example:
+   ```javascript
+   function outer() {
+     var x = 10;
+     
+     function inner() {
+       console.log(x); // Lexical scope: Accessing variable from outer function
+     }
+     
+     inner();
+   }
+   
+   outer(); // Output: 10
+   ```
+
+   In this example, the `inner` function has access to the variable `x` defined in the outer function. This is because lexical scope allows inner functions to access variables from their parent functions.
+
+Lexical Scope in JavaScript is defined by the placement of functions and blocks within the code, whereas Function Scope pertains specifically to variables within a function. Understanding these concepts is crucial for properly scoping variables and avoiding unintended conflicts or errors in your JavaScript code.
+
+## Closure
+
+A closure is a fundamental concept in JavaScript that allows a function to retain access to variables from its outer (enclosing) lexical scope, even after the outer function has finished executing. In other words, a closure gives a function access to variables that are not directly within its own scope.
+
+Here's an example to illustrate closures in JavaScript:
+
+```javascript
+function outerFunction() {
+  var outerVariable = 'Hello';
+
+  function innerFunction() {
+    console.log(outerVariable);
+  }
+
+  return innerFunction;
+}
+
+var closure = outerFunction();
+closure(); // Output: Hello
+```
+
+In the above example, `innerFunction` is defined inside `outerFunction` and references the `outerVariable` variable. When `outerFunction` is invoked, it creates an instance of `innerFunction` and returns it. This returned function still retains access to the `outerVariable`, forming a closure. 
+
+Even though `outerFunction` has finished executing, the `closure` variable can still be called to execute `innerFunction` and access the `outerVariable` value, resulting in the output "Hello".
+
+Closures are powerful because they enable functions to maintain their own unique and persistent references to variables from their parent scopes. They are commonly used in scenarios such as creating private variables and implementing function factories or currying.
+
+## setTimeout & setInterval
+
+Certainly! Here are examples of `setInterval` and `setTimeout` in JavaScript:
+
+1. `setInterval`:
+The `setInterval` function is used to repeatedly execute a specified function at a defined interval. It takes two parameters: the function to be executed and the time interval (in milliseconds) between each execution.
+
+```javascript
+function intervalFunction() {
+  console.log("This message will be printed every 2 seconds.");
+}
+
+setInterval(intervalFunction, 2000);
+```
+
+In this example, the `intervalFunction` will be executed every 2 seconds (2000 milliseconds) indefinitely until the `clearInterval` function is called.
+
+2. `setTimeout`:
+The `setTimeout` function is used to execute a specified function after a specified delay. It takes two parameters: the function to be executed and the delay time (in milliseconds) before the function is executed.
+
+```javascript
+function timeoutFunction() {
+  console.log("This message will be printed after 3 seconds.");
+}
+
+setTimeout(timeoutFunction, 3000);
+```
+
+In this example, the `timeoutFunction` will be executed after a delay of 3 seconds (3000 milliseconds). The function is executed once and not repeated.
+
+Both `setInterval` and `setTimeout` are commonly used for executing code asynchronously or performing tasks at specific intervals or delays. Remember to store the returned value of `setInterval` or `setTimeout` if you need to clear or cancel the scheduled execution using `clearInterval` or `clearTimeout`, respectively.
+
+## Clear Execution 
+
+To clear the scheduled execution of a function using `setInterval` or `setTimeout`, you can use the corresponding methods: `clearInterval` and `clearTimeout`. Here's how you can clear them:
+
+1. Clearing `setInterval`:
+To stop the repeated execution of a function scheduled with `setInterval`, you can use the `clearInterval` method. It requires the interval ID returned by the `setInterval` function.
+
+```javascript
+function intervalFunction() {
+  console.log("This message will be printed every 2 seconds.");
+}
+
+var intervalId = setInterval(intervalFunction, 2000);
+
+// To clear the interval:
+clearInterval(intervalId);
+```
+
+In this example, the `clearInterval` function is called with the `intervalId` as the argument, which stops the repeated execution of the `intervalFunction`.
+
+2. Clearing `setTimeout`:
+To cancel the execution of a function scheduled with `setTimeout` before it occurs, you can use the `clearTimeout` method. It also requires the timeout ID returned by the `setTimeout` function.
+
+```javascript
+function timeoutFunction() {
+  console.log("This message will be printed after 3 seconds.");
+}
+
+var timeoutId = setTimeout(timeoutFunction, 3000);
+
+// To clear the timeout:
+clearTimeout(timeoutId);
+```
+
+In this example, the `clearTimeout` function is called with the `timeoutId` as the argument, which prevents the execution of the `timeoutFunction`.
+
+By using `clearInterval` or `clearTimeout`, you can effectively cancel the scheduled execution of functions using `setInterval` or `setTimeout`, respectively. Make sure to provide the correct ID returned by the corresponding scheduling function to clear the correct interval or timeout.
