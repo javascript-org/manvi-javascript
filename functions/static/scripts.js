@@ -399,9 +399,19 @@ function interval()
   function display()
   {
     console.log('I am at interval display');
+    // 100 lines of code
   }
 
-  setInterval(display, 2000);
+  let intervalId = setInterval(display, 2000);
+  localStorage.setItem("intervalId", intervalId);
+ // clearInterval(intervalId);
 }
 
 interval();
+
+function clearMyInterval()
+{
+  let intervalId = localStorage.getItem("intervalId");
+  console.log(intervalId);
+  clearInterval(intervalId);
+}
