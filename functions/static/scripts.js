@@ -325,3 +325,83 @@ function btnHandler18()
   callAndApplyExample();
   callAndApplyExample_1();
 }
+
+
+function bindExample()
+{
+  const display= function(state, city){
+    console.log(`${this.firstName}, ${this.lastName} is from ${state} , ${city}`);
+  }
+
+  let person = {
+    firstName: 'John',
+    lastName: 'Doe',
+  }
+
+  const copyFunction = display.bind(person,'UP', 'NOIDA');
+  console.log(copyFunction);
+  copyFunction();
+
+  const copyFunction1 = display.bind(person,'UP');
+  console.log(copyFunction1);
+  copyFunction1(); // undefined
+  copyFunction1('NOIDA');
+
+  const copyFunction2 = display.bind(person);
+  console.log(copyFunction2);
+  copyFunction2('UP', 'NOIDA');
+
+
+}
+
+function btnHandler19()
+{
+  bindExample();
+}
+
+// scope : function scope, lexical scope
+// closure
+let a = 20; // global
+function outerFunction()
+{
+  let x = 10; // function scope
+  console.log(x, a);  // accessing a is lexical scope
+  function innerFunction()
+  {
+    let y = 20; // function scope
+    let result = x + y + a; // accessing x, a : lexical scope
+    console.log(result);
+  }
+  return innerFunction;
+
+}
+outerFunction(); // 10, 20
+console.log("======================");
+outerFunction()(); // 10, 20  | 50 // currying
+// console.log(x);
+
+
+function timeout()
+{
+  function display()
+  {
+    console.log(`I am at display`);
+  }
+  console.log('Í am about to call timeout');
+  let timeoutId = setTimeout(display, 2000); // 2000ms = 2second. 1000ms = 1second
+  //clearTimeout(timeoutId);
+}
+
+timeout();
+
+function interval()
+{
+  function display()
+  {
+    console.log('I am at interval display');
+  }
+
+  setInterval(display, 2000);
+}
+
+interval();
