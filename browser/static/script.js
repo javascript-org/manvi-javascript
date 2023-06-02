@@ -45,6 +45,7 @@ function addOptions(options, questionWrapperDiv) {
   for (let option of options) {
     let optionLabel = document.createElement("label");
     optionLabel.innerText = option.id+":"
+
     let radioBtn = document.createElement("input");
     radioBtn.type = "radio";
     radioBtn.checked = false;
@@ -52,8 +53,10 @@ function addOptions(options, questionWrapperDiv) {
     radioBtn.value = option.id;
     radioBtn.name='option';
     radioBtn.onclick=answerOptionClick;
+
     let radioLabel = document.createElement('label');
     radioLabel.innerText = option.content;
+    
     optionDiv.appendChild(optionLabel);
     optionDiv.appendChild(radioBtn);
     optionDiv.appendChild(radioLabel);
