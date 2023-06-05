@@ -207,7 +207,7 @@ function multiDimensionArray() {
 
 /**
  * map, filter, forEach
- * find, findIndex
+ * find, findIndex, findLastIndex
  * reduce, reduceRight
  * every, some
  */
@@ -225,26 +225,138 @@ function arrayFunctionalArrowMethods() {
   someExample();
 }
 
-
 /**
-  * flat, flatMap
-  */
- function arrayMethods2() {}
- 
- 
+ * flat, flatMap
+ */
+function arrayMethods2() {
+  
+}
+
 /**
  * slice, splice
  * join, split
  * sort, reverse
  * includes, indexOf, lastIndexOf
- * concat, toString
- * fill, copyWithin
+ * concat, fill,
+ * toString, copyWithin
  */
- function arrayMethods1() {
+function arrayIncludes_IndexOf_LastIndexOf()
+{
+  let arr = [2,1,3,NaN, 3];
+  console.log('includes',arr.includes(NaN));
+  console.log('includes',arr.includes(100));
+  console.log('includes',arr.includes(1));
+  
+  console.log('indexOf',arr.indexOf(NaN));
+  console.log('indexOf',arr.indexOf(3));
+  console.log('indexOf',arr.indexOf(30));
 
- }
+  console.log('lastIndexOf',arr.lastIndexOf(NaN));
+  console.log('lastIndexOf',arr.lastIndexOf(3));
+  console.log('lastIndexOf',arr.lastIndexOf(30));
 
- 
+}
+
+function arrayConcatAndFill()
+{
+  let arr1 =[1,2,3];
+  let arr2 = [4,5,6];
+  let arr3 = arr1.concat(arr2);
+  console.log(arr3, arr2, arr1);
+
+  let arr= new Array(5);
+  arr.fill(5, 1, 3);
+  console.log(arr);
+
+  arr.fill(5, 3);
+  console.log(arr);
+
+  arr.fill(5);
+  console.log(arr);
+}
+function arraySortAndReverse()
+{
+   let arr = [2,5,4,-2,3,1];
+   let sortFunction = (a,b)=>{
+    return a - b;
+   }
+   arr.sort(sortFunction); // sort is higher order function
+   console.log(arr);
+
+   let names = ['John','Alex','Steve'];
+
+   let sortStrFunction = (a,b)=>{
+    return a.localeCompare(b);
+   }
+   names.sort(sortStrFunction);
+   console.log(names);
+   
+   arr.reverse();
+  console.log(arr);
+}
+
+function arrayJoinAndSplit() {
+  console.log("array join and split");
+  let message = "Hello, Hi, Bye, Welcome";
+  let result1 = message.split(",");
+  console.log(result1);
+
+  let result2 = message.split(",", 2);
+  console.log(result2);
+
+  let message1 = "test";
+  let result3 = message1.split("");
+  console.log(result3);
+
+  let result4 = result1.join("#");
+  console.log(result4);
+}
+function arraySplice() {
+  // used to delete or replace elements. supports -ve +ve index
+  console.log("array splice");
+  let arr = ["A", "B", "C", "D", "E", "F"];
+
+  delete arr[0];
+  console.log(arr);
+
+  let removedElements = arr.splice(1, 3); // remove 3 elements at 1 index
+  console.log(arr);
+  console.log(removedElements);
+
+  let arr2 = arr.splice(1, 0, ...removedElements); // remove 0 elements at index 1 and replace with give values
+  console.log(arr2);
+  console.log(arr);
+
+  let arr21 = arr.splice(-2, 1); // remove 1 element at -2 index
+  console.log(arr21);
+  console.log(arr);
+
+  let arr3 = arr.splice(-2, 1, "G", "H"); // remove 1 element at -2 index and place elements
+  console.log(arr3);
+  console.log(arr);
+}
+function arraySlice() {
+  // returns subarray
+  let arr = ["A", "B", "C", "D", "E", "F"];
+
+  let result = arr.slice(1, 5); // elements from firstIndex(included) to lastIndex(excluded)
+  console.log(arr);
+  console.log(result);
+
+  result = arr.slice(3); // elements from
+  console.log(result);
+
+  result = arr.slice(-2); // -2 index not included
+  console.log(result);
+}
+function arrayMethods1() {
+  arraySlice();
+  arraySplice();
+  arrayJoinAndSplit();
+  arraySortAndReverse();
+  arrayConcatAndFill();
+  arrayIncludes_IndexOf_LastIndexOf();
+}
 
 function forEachExample() {
   let arr1 = [10, 20, 30, 40];
@@ -407,6 +519,7 @@ function addEventListeners() {
   addClickEvent("id8", sparseArray);
   addClickEvent("id9", arrayIteration);
   addClickEvent("id10", arrayFunctionalArrowMethods);
+  addClickEvent("id11", arrayMethods1);
 }
 
 function addClickEvent(id, functionParam) {
