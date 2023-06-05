@@ -38,8 +38,20 @@ function greet() {
   let Exponentiation1 = k ** 4;
   console.log(Exponentiation1);
 
- 
 }
 function datatype() {
-  console.log("datatype")
+  console.log("datatype");
+}
+
+function man() {
+  console.log("Cristiano Ronaldo");
+}
+
+function iron() {
+  console.log("ironman")
+
+  let a = 10;
+  console.log(a);
+
+  let z = 50
 }
