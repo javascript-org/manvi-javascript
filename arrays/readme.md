@@ -12,7 +12,6 @@
 - Array Iteration
 - Multidimensional Array
 - Array Methods
-- Array Methods & thisArgs
 - Array Methods flat, flatMap
 
 
@@ -62,6 +61,5 @@
 
 22. `reduceRight()`: Applies a function against an accumulator and each array element, starting from the right and reducing it to a single value.
 
-## Array Methods & thisArgs
 
 

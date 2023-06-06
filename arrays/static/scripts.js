@@ -207,7 +207,7 @@ function multiDimensionArray() {
 
 /**
  * map, filter, forEach
- * find, findIndex, findLastIndex
+ * find, findIndex
  * reduce, reduceRight
  * every, some
  */
