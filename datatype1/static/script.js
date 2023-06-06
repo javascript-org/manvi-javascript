@@ -12,7 +12,7 @@ function greet() {
   let add = x + y; //expression
   console.log(add);
 
-  let subtract = x + y;
+  let subtract = x - y;
   console.log(subtract);
 
   let multiply = x * y;
@@ -50,8 +50,27 @@ function man() {
 function iron() {
   console.log("ironman")
 
-  let a = 10;
+  let a = 100;
   console.log(a);
 
-  let z = 50
+  let z = 50;
+  console.log(z);
+
+  let add = a + z;
+  console.log(add);
+
+  let subtract = a - z;
+  console.log(subtract);
+
+  let multiply = a * z;
+  console.log(multiply);
+
+  let divide = a / z;
+  console.log(divide);
+
+  let remainder2 = a % z;
+  console.log(remainder2);
+
+  let Exponentiation2 = z ** a;
+  console.log(Exponentiation2);
 }
