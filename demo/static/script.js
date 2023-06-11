@@ -152,3 +152,139 @@ double = multiply1(2);
 console.log(double);
 double(3);
 multiply1(2)(3);
+
+function destructuringExample() {
+  // declaration
+  let person = {
+    firstName: "John",
+    lastName: "Doe",
+  };
+
+  console.log(person.firstName);
+
+  let { firstName, lastName } = person;
+  console.log(firstName, lastName);
+
+  let arr = ["Hi", "Hello"];
+
+  let [x, y] = arr;
+  console.log(x, y);
+}
+
+destructuringExample(); // invocation executes code
+
+function destructuredParams({ firstName, lastName }, [x, y]) {
+  console.log(firstName, lastName, x, y);
+}
+
+function ex1() {
+  let person = {
+    firstName: "John",
+    lastName: "Doe",
+    age: 23,
+  };
+
+  let arr = ["Hi", "Hello", "Bye"];
+
+  destructuredParams(person, arr);
+}
+
+
+ex1();
+
+function spreadParam(person, ...nums) // spread param should present at last
+{
+    console.log(person, nums);
+    console.log(nums.length);
+}
+
+spreadParam('John');
+spreadParam('John', 2,3,4,5,6,'Hello');
+
+function swap(x, y)
+{
+    let temp = y;
+    y = x;
+    x = temp;
+    console.log(x,y); // 20, 10
+}
+
+function ex2()
+{
+    let a = 10;
+    let b = 20;
+    swap(a,b); // call by value
+    console.log(a,b); // 10, 20
+}
+
+ex2();
+
+function swap(num, arr)
+{
+   let t = num.x;
+   num.x = num.y;
+   num.y = t;
+
+   let t1 = arr[0];
+   arr[0]=arr[1];
+   arr[1]=t;
+}
+
+function ex3()
+{
+    let a = 100;
+    let b  = 200;
+
+    let num = {
+        x: a,
+        y: b
+    }; // heap object
+
+    let arr = [a,b]; // heap array
+
+    swap(num, arr); // call by reference
+
+    console.log(a,b); // 100, 200
+
+    console.log(num, arr)
+}
+
+ex3();
+
+
+function callExample()
+{
+    let person = {
+        firstName: "John",
+        lastName: "Doe",
+        age: 23,
+        display: function(state, city){
+            console.log(this.firstName, this.lastName, state, city);
+        }
+      };
+
+    console.log(person.display);
+    person.display('tn','chennai');
+
+
+    let person2 = {
+        firstName: "John1",
+        lastName: "Doe1",
+        age: 23,
+        display: person.display
+      };
+
+      person2.display('ka','blr');
+
+      person.display.call(person2, 'ka', 'blr');
+      person.display.apply(person2, ['ka', 'blr']);
+
+      let copyDisplay = person.display.bind(person2, 'ka', 'blr');
+      copyDisplay();
+
+      copyDisplay = person.display.bind(person2);
+      copyDisplay('ka','blr');
+     
+}
+
+callExample();
