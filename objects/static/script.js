@@ -16,8 +16,8 @@ function f5()
         __proto__: objA
     }
 
-    objB.execute();
-    objA.execute();
+    objB.execute(); // 10
+    objA.execute(); // undefined
 
     for(let key in objB){
         console.log(key); // enumerable keys : own keys + inherited keys
