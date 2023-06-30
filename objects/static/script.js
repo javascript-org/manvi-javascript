@@ -1,14 +1,35 @@
 window.onload = function (event) {
   literals();
   proto();
-  proto1_prototype_chain();
+//   proto1_prototype_chain();
   proto2_prototype_this();
   proto3_object_keys();
 };
 
+function constructorFunction() {
+  function Person(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+
+    this.greet=(message)=>{
+        console.log(`${message} ${this.firstName} ${this.lastName}`);
+    }
+  }
+
+  
+  Person.prototype.getFullName = function () {
+    return `${this.firstName} ${this.lastName}`;
+  };
+
+  let person1 = new Person('John','Doe');
+  console.log(person1.getFullName()); 
+  person1.greet('Welcome');
+
+}
+
 /**
  * using __proto__
- * 
+ *
  * let objA={}
  * objA.x=10
  * let objB={}
@@ -19,43 +40,43 @@ window.onload = function (event) {
  *   z: 10
  * }
  */
-function proto3_object_keys()
-{
-    console.log('object keys');
-    let objA={
-        x: 10,
-        w: 20,
-        write:function(){
-            this.z = 100;
-            console.log(`${this.x}`);
-        }
-    }
+function proto3_object_keys() {
+  console.log("object keys");
+  let objA = {
+    x: 10,
+    w: 20,
+    write: function () {
+      this.z = 100;
+      console.log(`${this.x}`);
+    },
+  };
 
-    let objB={
-        x: 20,
-        y: 30,
-        display:function(){
-            console.log(`${this.y}`);
-        }
-    }
+  let objB = {
+    x: 20,
+    y: 30,
+    display: function () {
+      console.log(`${this.y}`);
+    },
+  };
 
-    objB.__proto__=objA;
-    
-    console.log('inherited keys');
-    for(let key in objB){
-        console.log(key);
-    }
-    console.log('object keys');
-    console.log('object keys for objB: '+Object.keys(objB));
-    objB.write();
-    console.log('object keys for objB: '+Object.keys(objB));
-    console.log('object keys for objB: '+Object.keys(objA));
+  objB.__proto__ = objA;
 
-    console.log('own property');
-    console.log('x in objB'+Object.prototype.hasOwnProperty.call(objB,'x'));
-    console.log('w in objB'+Object.prototype.hasOwnProperty(objB, 'w'));
-    console.log('own property names of objB: '+Object.getOwnPropertyNames(objB));
-   
+  console.log("inherited keys");
+  for (let key in objB) {
+    console.log(key);
+  }
+  console.log("object keys");
+  console.log("object keys for objB: " + Object.keys(objB));
+  objB.write();
+  console.log("object keys for objB: " + Object.keys(objB));
+  console.log("object keys for objB: " + Object.keys(objA));
+
+  console.log("own property");
+  console.log("x in objB" + Object.prototype.hasOwnProperty.call(objB, "x"));
+  console.log("w in objB" + Object.prototype.hasOwnProperty(objB, "w"));
+  console.log(
+    "own property names of objB: " + Object.getOwnPropertyNames(objB)
+  );
 }
 /**
  * __proto__ is a historical getter/setter for [[Prototype]]
@@ -69,48 +90,45 @@ By the specification, __proto__ must only be supported by browsers. In fact thou
 
 As the __proto__ notation is a bit more intuitively obvious, we use it in the examples.
  */
-function proto2_prototype_this()
-{
- console.log('prototype2');
+function proto2_prototype_this() {
+  console.log("prototype2");
 
- let objA={
-
-    execute:function(){
-        if(this.x){
-          console.log(this.x);
-        }
-
+  let objA = {
+    execute: function () {
+      if (this.x) {
+        console.log(this.x);
+      }
     },
-    setX:function(){
-        this.x=10;
-    }
- };
+    setX: function () {
+      this.x = 10;
+    },
+  };
 
- let objB={
-    __proto__:objA,
- }
+  let objB = {
+    __proto__: objA,
+  };
 
- objB.setX();
- objB.execute();
- objA.execute();
+  objB.setX();
+  objB.execute();
+  objA.execute();
 }
 
 function proto1_prototype_chain() {
-    console.log('prootype 1');
+  console.log("prootype 1");
   let objA = {
     x: 10,
-    display:function(){
-        console.log(`Inside objA: ${this.x}`);
+    display: function () {
+      console.log(`Inside objA: ${this.x}`);
     },
-    write: function(){
+    write: function () {
       console.log(`Inside objA: ${this.y}`);
-    }
+    },
   };
   let objB = {
     y: 20,
-    write: function(){
-        console.log(`Inside objB: ${this.y}`);
-      }
+    write: function () {
+      console.log(`Inside objB: ${this.y}`);
+    },
   };
 
   objB.__proto__ = objA; // sets objB.[[Prototype]] = objA
@@ -119,16 +137,21 @@ function proto1_prototype_chain() {
   objB.write();
   objB.display();
 
-  let objC={
+  let objC = {
     y: 300,
     x: 100,
-    __proto__: objB
-  }
+    __proto__: objB,
+  };
 
   console.log(objC.y);
   console.log(objC.x);
   objC.display();
   objC.write();
+
+  console.log(Object.getPrototypeOf(objC))
+  console.log(Object.getPrototypeOf(objB))
+  console.log(Object.getPrototypeOf(objA))
+  console.log(Object.prototype)
 }
 
 /**
