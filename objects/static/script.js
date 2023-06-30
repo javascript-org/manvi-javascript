@@ -7,7 +7,8 @@ window.onload = function (event) {
 };
 
 function constructorFunction() {
-  function Person(firstName, lastName) {
+  
+    function Person(firstName, lastName) {
     this.firstName = firstName;
     this.lastName = lastName;
 
@@ -16,7 +17,6 @@ function constructorFunction() {
     }
   }
 
-  
   Person.prototype.getFullName = function () {
     return `${this.firstName} ${this.lastName}`;
   };
