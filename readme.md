@@ -30,3 +30,4 @@
 
 - Javascript the definitive guide book
 - Javascript for impatients book
+- Speaking JavaScript
