@@ -7,7 +7,7 @@ export const MemoExample = ()=>{
 
     const sqrFunction = ()=>{
         console.log('on each render it will be called');
-        return Math.pow(10,3)+":::";
+        return Math.pow(count,3)+":::";
     }
     const sqrValue = sqrFunction() + Math.random(); // invocation
 
