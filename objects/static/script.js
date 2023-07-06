@@ -1,30 +1,236 @@
 window.onload = function (event) {
   literals();
   proto();
-//   proto1_prototype_chain();
+  proto1_prototype_chain();
   proto2_prototype_this();
   proto3_object_keys();
 };
 
-function constructorFunction() {
+function factoryFunction()
+{
+  function personFactory(firstName,lastName){
+    console.log(this);
+    return {
+      firstName:firstName,
+      lastName,
+      display(){
+        console.log(`${this.firstName} ${this.lastName}`);
+      }
+    }
+  }
+
+  personFactory.prototype.greet=function(){
+    console.log(`welcome ${this.lastName}`);
+  }
+  let person = personFactory('John','Doe');
+  person.display();
+  person.greet();
+
+  person = new personFactory('John','Doe');
+  person.display();
+  person.greet();
+}
+
+function objectEntries()
+{
+  // entries(), keys(), values()
+  let objA = {
+    x:10,
+    display(){
+      console.log(`${this.x}`);
+    }
+  }
+
+  let objB = {
+    __proto__: objA,
+    y: 20,
+    print(){
+      console.log(`inside objB: ${this.y}`);
+    }
+  }
+
+  for(let key in objB){
+    console.log(`key: ${key}`);
+  }
+
+  console.log(`entries: ${Object.entries(objB)}`);
+  console.log(`values: ${Object.values(objB)}`);
+  console.log(`keys: ${Object.keys(objB)}`);
+  objB.print();
   
-    function Person(firstName, lastName) {
+}
+// let arrowX=10;
+this.arrowX=100;
+function arrowThis(){
+  let objA={
+    x: 20,
+    display: ()=>{
+      console.log(`display:${this} ${this.x}`);
+    },
+    print: function(){
+      console.log(`print: ${this.x}`);
+    },
+    message: ()=>{
+      console.log(`messgae: ${this.arrowX}`);
+    }
+
+  }
+
+  objA.display();
+  objA.print();
+  objA.message();
+
+}
+/**
+ * Object.assign vs spread:
+ * 
+ * The `Object.assign()` method and the spread syntax (`{...}`) can both be used to merge multiple objects into a single object. However, there are a few differences between them:
+
+1. **Mutability:** `Object.assign()` mutates the target object, while the spread syntax creates a new object.
+
+   - With `Object.assign()`, the properties from the source objects are copied directly into the target object. If there are properties with the same name in both the target and source objects, the value of the target object's property will be overwritten with the value from the source object.
+
+   - On the other hand, the spread syntax creates a new object by copying the properties from the source objects. The original objects (`objA` and `objB`) remain unchanged.
+
+2. **Nested objects and deep cloning:** The spread syntax performs a shallow copy, while `Object.assign()` allows for deep cloning of nested objects.
+
+   - When using the spread syntax (`{...objA, ...objB}`), properties from `objB` will overwrite properties with the same name in `objA`. However, if there are nested objects within `objA` or `objB`, the references to those nested objects will be shared in the merged object. Changes to the nested objects will be reflected in both the original and merged objects.
+
+   - `Object.assign()` performs a shallow copy of properties, but for nested objects, it creates new references. This means that changes to the nested objects in the merged object will not affect the original objects.
+
+Here's an example to illustrate these differences:
+
+```javascript
+let objA = { x: 10, y: { z: 20 } };
+let objB = { y: { z: 30 }, w: 40 };
+
+// Using Object.assign()
+let objC = Object.assign(objA, objB);
+console.log(objA); // { x: 10, y: { z: 30 }, w: 40 }
+console.log(objC); // { x: 10, y: { z: 30 }, w: 40 }
+
+// Using spread syntax
+let objK = { ...objA, ...objB };
+console.log(objA); // { x: 10, y: { z: 20 } }
+console.log(objK); // { x: 10, y: { z: 30 }, w: 40 }
+
+objA.y.z = 50; // this change will reflect in objC due to 
+// Object.assign gives shallow copy for nested objects
+
+console.log(objA); // { x: 10, y: { z: 50 } }
+console.log(objK); // { x: 10, y: { z: 30 }, w: 40 }
+console.log(objC); // { x: 10, y: { z: 50 }, w: 40 } // z is shared and shallow copy
+```
+
+In the example above, you can see that `Object.assign()` 
+modifies `objA` and `objC` directly, '
+whereas the spread syntax creates a new object `objK`. 
+
+Additionally, changes to the nested object `y` in `objA` are reflected in `objC` 
+(due to shared references) but not in `objK` (as it performs a shallow copy).
+ * 
+ */
+function object_assign()
+{
+  let objA = {
+    x:10,
+    display:function(){
+      console.log(`${this.x}`);
+    },
+    print:function(){
+      console.log(`${this.x}`);
+    }
+  }
+
+  let objB = {
+    y: 20,
+    display: function(){
+      console.log(`${this.y}`);
+    }
+  }
+  objA.display();
+  objB.display();
+
+  let objC = Object.assign(objA,objB);
+  objC.display(); // 20 replaced
+  objC.print(); // 10
+
+  objC = {...objA, ...objB};
+  objC.display(); // 20 replaced
+  objC.print(); // 10
+
+}
+
+function proto_modern_way() {
+  // create, isPrototypeof, setPrototype, getPrototypeOf
+  let objA = {
+    x: 10,
+    display: function() {
+      console.log(`${this.x} inside A`);
+    },
+  };
+
+  let objB = Object.create(objA);
+  objB.y = 20;
+  objB.print = function(){
+    console.log(`${this.y} inside B`);
+  };
+
+
+  console.log(objA.isPrototypeOf(objB));
+
+  objB.display(); // 10
+  objB.print(); // 20
+
+  objA.display(); // 10
+  objA.print(); // undefined
+
+
+
+  console.log(Object.getPrototypeOf(objB)); // objA
+  console.log(Object.getPrototypeOf(objA)); // Object.prototype
+  console.log(Object.getPrototypeOf({})); // Object.prototype
+  console.log(Object.getPrototypeOf(new Object())); // Object.prototype
+  console.log(Object.prototype);
+  console.log(Object.prototype==Object.getPrototypeOf({})); // true
+  console.log(Object.prototype==Object.getPrototypeOf(objA)); // true
+  console.log(Object.prototype==Object.getPrototypeOf(new Object())); // true
+
+  let objC = {
+    z: 30,
+    print: function () {
+      console.log(`${this.z} inside objC`);
+    },
+  };
+
+  Object.setPrototypeOf(objC, objA);
+
+  console.log(Object.getPrototypeOf(objC)); // objA
+  console.log(Object.getPrototypeOf(objA)); // Object.prototype
+
+  objC.display(); // 10
+  objC.print(); // 30
+
+
+
+}
+function constructorFunction() {
+  function Person(firstName, lastName) {
     this.firstName = firstName;
     this.lastName = lastName;
 
-    this.greet=(message)=>{
-        console.log(`${message} ${this.firstName} ${this.lastName}`);
-    }
+    this.greet = (message) => {
+      console.log(`${message} ${this.firstName} ${this.lastName}`);
+    };
   }
 
   Person.prototype.getFullName = function () {
     return `${this.firstName} ${this.lastName}`;
   };
 
-  let person1 = new Person('John','Doe');
-  console.log(person1.getFullName()); 
-  person1.greet('Welcome');
-
+  let person1 = new Person("John", "Doe");
+  console.log(person1.getFullName());
+  person1.greet("Welcome");
 }
 
 /**
@@ -148,10 +354,10 @@ function proto1_prototype_chain() {
   objC.display();
   objC.write();
 
-  console.log(Object.getPrototypeOf(objC))
-  console.log(Object.getPrototypeOf(objB))
-  console.log(Object.getPrototypeOf(objA))
-  console.log(Object.prototype)
+  console.log(Object.getPrototypeOf(objC));
+  console.log(Object.getPrototypeOf(objB));
+  console.log(Object.getPrototypeOf(objA));
+  console.log(Object.prototype);
 }
 
 /**
