@@ -2,6 +2,53 @@ window.onload=function(event){
 
 }
 
+
+function f6()
+{
+  // create, setPrototype, getPrototype, isPrototypeOf
+
+  let objA ={
+    x:10,
+    display: function(){
+      console.log(`inside A ${this.x}`);
+    }
+  }
+
+  let objB = Object.create(objA);
+  objB.y=20;
+  objB.print=function(){
+    console.log(`inside B: ${this.y} and ${this.x}`);
+  }
+
+  objB.display();
+  objB.print();
+
+  // objA.print();
+  objA.display();
+
+  console.log(Object.getPrototypeOf(objB));
+  console.log(Object.getPrototypeOf(objA));
+  console.log(Object.getPrototypeOf({}));
+  console.log(Object.getPrototypeOf(new Object()));
+  console.log(Object.prototype);
+  console.log(Object.prototype===Object.getPrototypeOf(objA));
+  console.log(objB.isPrototypeOf(objA));
+  console.log(objA.isPrototypeOf(objB));
+
+  let objC = {
+    z: 30,
+    print: function(){
+      console.log(`inside C: ${this.z} & ${this.x}`);
+    }
+  }
+  Object.setPrototypeOf(objC,objA);
+
+  objC.print();
+  objC.display();
+
+  objA.display();
+  objA.print();
+}
 function f5()
 {
     let objA={
